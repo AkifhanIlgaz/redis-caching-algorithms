@@ -12,7 +12,7 @@ import (
 const userPrefix = "user"
 const cacheKeyPrefix = "cache_key"
 
-// FIFOCache represents a First-In-First-Out cache implemented with Redis.
+// FIFOCache represents a LRU cache implemented with linked list in Redis.
 type FIFOCache struct {
 	ctx       context.Context
 	client    *redis.Client
@@ -39,7 +39,9 @@ func (c *FIFOCache) MakeRequest(id string) User {
 	if err != nil {
 		log.Printf("Cache miss for user with id: %s. Getting from DB.", id)
 		dbUser := getUserFromDb(id)
-		c.Set(dbUser)
+		if err := c.Set(dbUser); err != nil {
+			log.Printf("Cannot write to cache")
+		}
 		return dbUser
 	}
 

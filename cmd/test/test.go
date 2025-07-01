@@ -22,25 +22,28 @@ func main() {
 
 	// Clear the database before starting
 	client.FlushDB(ctx)
-
 	// Create a new FIFO cache with a capacity of 3
-	fifoCache := cache.NewFIFO(ctx, client, 3, "fifo_cache")
+	fifoCache := cache.NewLRU(ctx, client, 3, "fifo_cache")
 
-	fmt.Println("--------------------------------------------------------")
-
+	fmt.Println("-------------------------------------------------------- Press any key to continue")
+	fmt.Scanln()
 	// Request a user that is not in the cache
 	user1 := fifoCache.MakeRequest("1")
 	fmt.Printf("Got user: %v\n", user1)
 	fmt.Println("--------------------------------------------------------")
+	fmt.Scanln()
 	// Request the same user again, this time it should be a cache hit
 	user1_cached := fifoCache.MakeRequest("1")
 	fmt.Printf("Got user from cache: %v\n", user1_cached)
 	fmt.Println("--------------------------------------------------------")
+	fmt.Scanln()
 	// Add two more users to fill the cache
 	fifoCache.MakeRequest("2")
 	fmt.Println("--------------------------------------------------------")
+	fmt.Scanln()
 	fifoCache.MakeRequest("3")
 	fmt.Println("--------------------------------------------------------")
+	fmt.Scanln()
 	// Add one more user, this should evict the first user (user1)
 	fifoCache.MakeRequest("4")
 
@@ -48,5 +51,6 @@ func main() {
 	user1_after_eviction := fifoCache.MakeRequest("1")
 	fmt.Printf("Got user after eviction: %v\n", user1_after_eviction)
 	fmt.Println("--------------------------------------------------------")
+	fmt.Scanln()
 
 }
