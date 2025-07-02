@@ -49,3 +49,11 @@ The TTL cache is implemented using Redis's built-in key expiration feature. When
 ## Usage
 
 To see the caching algorithms in action, you can run the `test.go` file in the `cmd/test` directory. This will demonstrate the step-by-step execution of the cache logic.
+
+## Todos
+
+- [ ] **Add More Caching Algorithms**: Implement other caching strategies like MRU (Most Recently Used) or RR (Random Replacement).
+- [ ] **Unit Tests**: Develop a comprehensive test suite to verify the correctness of each caching algorithm.
+- [ ] **Generic Cache Interface**: Refactor the `Cache` interface to be more generic, allowing it to store different data types, not just `User` structs.
+- [ ] **Configuration**: Allow cache parameters (like size, TTL) to be configured through a file or environment variables.
+- [ ] **Improved Example**: Enhance the example in `cmd/test` to be more interactive or to simulate a more realistic use case.
