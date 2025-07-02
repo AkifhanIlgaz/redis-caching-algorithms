@@ -7,6 +7,7 @@ This project provides Go implementations of several common cache eviction algori
 - FIFO (First-In, First-Out)
 - LFU (Least Frequently Used)
 - LRU (Least Recently Used)
+- TTL (Time-To-Live)
 
 ## Usage
 
@@ -40,6 +41,10 @@ The LFU cache is implemented using a Redis sorted set to track the frequency of 
 ### LRU (Least Recently Used)
 
 The LRU cache is implemented using a Redis sorted set to maintain the order of items by their last access time. The score of each member in the sorted set represents the timestamp of the last access. When an item is accessed, its score is updated to the current time. When the cache is full, the item with the lowest score (oldest timestamp) is removed.
+
+### TTL (Time-To-Live)
+
+The TTL cache is implemented using Redis's built-in key expiration feature. When a new item is added to the cache, it is set with a specific time-to-live (TTL). Redis automatically removes the item from the cache when its TTL has expired. This approach is ideal for data that becomes stale or irrelevant after a certain period.
 
 ## Usage
 
