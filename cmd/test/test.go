@@ -48,10 +48,5 @@ func main() {
 	fifoCache.MakeRequest("4")
 	fmt.Println("--------------------------------------------------------")
 	fmt.Scanln()
-	// Request user1 again, this should be a cache miss and fetched from the db
-	user1_after_eviction := fifoCache.MakeRequest("1")
-	fmt.Printf("Got user after eviction: %v\n", user1_after_eviction)
-	fmt.Println("--------------------------------------------------------")
-	fmt.Scanln()
 
 }
